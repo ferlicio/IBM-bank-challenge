@@ -21,8 +21,7 @@ public class Cliente {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "conta_id", referencedColumnName = "id", nullable = false, unique = true)
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Conta conta;
 
     // Getters e Setters

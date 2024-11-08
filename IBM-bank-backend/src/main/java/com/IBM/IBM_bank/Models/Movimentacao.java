@@ -33,7 +33,6 @@ public class Movimentacao {
     @Column(nullable = false)
     private LocalDate dataMovimentacao;
 
-    @Column(nullable = false)
     private LocalDate dataCompetencia; // Mês e ano da competência (e.g., "MM-yyyy")
 
     // Getters e Setters

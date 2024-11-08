@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "unique-id-generated-for-import",
+		"name": "Movimentacao API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movimentacao Endpoints",
+			"item": [
+				{
+					"name": "Listar Movimentações por Conta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimentacoes/conta/:contaId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimentacoes",
+								"conta",
+								":contaId"
+							],
+							"query": [
+								{
+									"key": "tipo",
+									"value": "DEBITO",
+									"disabled": false
+								},
+								{
+									"key": "dataInicio",
+									"value": "2024-11-01",
+									"disabled": false
+								},
+								{
+									"key": "dataFim",
+									"value": "2024-11-30",
+									"disabled": false
+								},
+								{
+									"key": "statusPagamento",
+									"value": "PENDENTE",
+									"disabled": false
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Movimentacao",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contaId\": 1234,\n    \"tipo\": \"CREDITO\",\n    \"valor\": 1500.00,\n    \"descricao\": \"Salário\",\n    \"statusPagamento\": \"PAGO\",\n    \"data\": \"2024-11-05\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/movimentacoes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimentacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Movimentacao",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Conta de Luz\",\n    \"valor\": 200.00,\n    \"statusPagamento\": \"PENDENTE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/movimentacoes/:movimentacaoId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimentacoes",
+								":movimentacaoId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Movimentacao",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/movimentacoes/:movimentacaoId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"movimentacoes",
+								":movimentacaoId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conta Endpoints",
+			"item": [
+				{
+					"name": "Listar Todas as Contas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Conta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/:contaId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								":contaId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Nova Conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva\",\n    \"idade\": 30,\n    \"endereco\": \"Rua das Palmeiras, 123\",\n    \"email\": \"joao.silva@example.com\",\n    \"saldoInicial\": 5000.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Conta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva Atualizado\",\n    \"endereco\": \"Rua das Palmeiras, 456\",\n    \"email\": \"joao.atualizado@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas/:contaId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								":contaId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Conta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas/:contaId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas",
+								":contaId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente Endpoints",
+			"item": [
+				{
+					"name": "Listar Todos os Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/:clienteId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								":clienteId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Novo Cliente com Conta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva\",\n    \"idade\": 30,\n    \"endereco\": \"Rua das Palmeiras, 123\",\n    \"email\": \"joao.silva@example.com\",\n    \"numeroConta\": \"123456789\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"João Silva Atualizado\",\n    \"endereco\": \"Rua das Palmeiras, 456\",\n    \"email\": \"joao.atualizado@example.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes/:clienteId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								":clienteId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/:clienteId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								":clienteId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conta de Crédito Endpoints",
+			"item": [
+				{
+					"name": "Listar Todas as Contas de Crédito",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas-credito",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas-credito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Conta de Crédito por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas-credito/:contaCreditoId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas-credito",
+								":contaCreditoId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Nova Conta de Crédito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroConta\": \"987654321\",\n    \"limiteCredito\": 5000.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas-credito",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas-credito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Conta de Crédito",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"limiteCredito\": 10000.00\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/contas-credito/:contaCreditoId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas-credito",
+								":contaCreditoId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Conta de Crédito",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/contas-credito/:contaCreditoId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"contas-credito",
+								":contaCreditoId"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

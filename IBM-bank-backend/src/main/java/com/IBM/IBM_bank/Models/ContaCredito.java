@@ -20,7 +20,8 @@ public class ContaCredito {
     @Column(nullable = false, length = 50)
     private Double saldoUtilizado;
 
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 50)
     private StatusConta status;
 
     @Column(nullable = false)
