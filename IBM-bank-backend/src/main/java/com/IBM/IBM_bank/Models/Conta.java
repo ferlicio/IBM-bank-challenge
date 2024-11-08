@@ -10,6 +10,9 @@ public class Conta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private Long numero;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoConta tipoConta;  // Tipo da conta (e.g., "CORRENTE", "POUPANCA")
@@ -21,7 +24,8 @@ public class Conta {
     @Column(nullable = false, length = 50)
     private StatusConta status;
 
-    @OneToOne(mappedBy = "conta", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false, unique = true)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
@@ -38,6 +42,14 @@ public class Conta {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Long numero) {
+        this.numero = numero;
     }
 
     public TipoConta getTipoConta() {

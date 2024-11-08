@@ -18,15 +18,15 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long
 
     List<Movimentacao> findByContaIdAndTipo(Long contaId, TipoMovimentacao tipo);
 
-    List<Movimentacao> findByContaIdAndDataBetween(Long contaId, LocalDate dataInicio, LocalDate dataFim);
+    List<Movimentacao> findByContaIdAndDataMovimentacaoBetween(Long contaId, LocalDate dataInicio, LocalDate dataFim);
 
     List<Movimentacao> findByContaIdAndStatusPagamento(Long contaId, StatusPagamento statusPagamento);
 
-    List<Movimentacao> findByContaIdAndTipoAndDataBetween(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim);
+    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetween(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim);
 
-    List<Movimentacao> findByContaIdAndDataBetweenAndStatusPagamento(Long contaId, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndDataMovimentacaoBetweenAndStatusPagamento(Long contaId, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
 
-    List<Movimentacao> findByContaIdAndTipoAndDataBetweenAndStatusPagamento(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetweenAndStatusPagamento(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
 
     List<Movimentacao> findByContaIdAndTipoAndStatusPagamento(Long contaId, TipoMovimentacao tipo, StatusPagamento statusPagamento);
 

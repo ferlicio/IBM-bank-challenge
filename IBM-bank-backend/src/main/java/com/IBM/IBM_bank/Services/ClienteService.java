@@ -29,8 +29,10 @@ public class ClienteService {
 
         // Criar uma nova conta com saldo zero e associar ao cliente
         Conta novaConta = new Conta();
-        novaConta.setId(clienteSalvo.getConta().getId());
-        novaConta.setTipoConta(TipoConta.CORRENTE);
+        novaConta.setNumero(clienteSalvo.getConta().getNumero());
+        if (cliente.getConta().getTipoConta() != null) {
+            novaConta.setTipoConta(TipoConta.CORRENTE);
+        }
         novaConta.setSaldo(0.0); // Saldo inicial zero
         novaConta.setStatus(StatusConta.ATIVA);
         novaConta.setCliente(clienteSalvo); // Associar a conta ao cliente salvo
@@ -39,8 +41,6 @@ public class ClienteService {
         Conta conta = contaRepository.save(novaConta);
 
         clienteSalvo.setConta(conta);
-
-        // Retornar o cliente salvo (pode incluir a conta se quiser)
         return clienteSalvo;
     }
 
