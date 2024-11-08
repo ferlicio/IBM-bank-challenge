@@ -1,5 +1,6 @@
 package com.IBM.IBM_bank.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class ContaCredito {
     @Column(nullable = false)
     private String dataPagamento;  // Exemplo: "dd-MM"
 
+    @JsonIgnore
     @OneToMany(mappedBy = "contaCredito", cascade = CascadeType.ALL)
     private List<Movimentacao> movimentacoesCredito;
 

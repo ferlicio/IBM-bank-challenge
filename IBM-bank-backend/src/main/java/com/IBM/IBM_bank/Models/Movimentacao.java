@@ -1,5 +1,6 @@
 package com.IBM.IBM_bank.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -12,10 +13,12 @@ public class Movimentacao {
 
     @ManyToOne
     @JoinColumn(name = "conta_id", nullable = false)
+    @JsonIgnore
     private Conta conta;
 
     @ManyToOne
     @JoinColumn(name = "conta_credito_id")
+    @JsonIgnore
     private ContaCredito contaCredito;
 
     @Enumerated(EnumType.STRING)
