@@ -1,5 +1,6 @@
 package com.IBM.IBM_bank.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -24,13 +25,16 @@ public class Conta {
     @Column(nullable = false, length = 50)
     private StatusConta status;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false, unique = true)
     private Cliente cliente;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
     private List<Movimentacao> movimentacoes;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "conta", cascade = CascadeType.ALL)
     private ContaCredito contaCredito;
 

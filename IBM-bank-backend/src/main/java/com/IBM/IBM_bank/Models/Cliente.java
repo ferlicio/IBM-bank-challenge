@@ -1,5 +1,6 @@
 package com.IBM.IBM_bank.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +22,7 @@ public class Cliente {
     @Column(nullable = false, length = 50)
     private String email;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Conta conta;
 
