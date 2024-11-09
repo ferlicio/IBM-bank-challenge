@@ -15,9 +15,15 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @PostMapping
+    @PostMapping("/novo/{numeroConta}")
+    public ResponseEntity<Cliente> criarClienteComConta(@PathVariable Integer numeroConta,
+                                                        @RequestBody Cliente cliente) {
+        return ResponseEntity.ok(clienteService.criarClienteComConta(cliente, numeroConta));
+    }
+
+    @PostMapping("/novo")
     public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente) {
-        return ResponseEntity.ok(clienteService.criarClienteComConta(cliente));
+        return ResponseEntity.ok(clienteService.criarCliente(cliente));
     }
 
     @GetMapping
@@ -26,17 +32,17 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarCliente(@PathVariable Long id) {
+    public ResponseEntity<Cliente> buscarCliente(@PathVariable Integer id) {
         return ResponseEntity.ok(clienteService.buscarClientePorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
         return ResponseEntity.ok(clienteService.atualizarCliente(id, cliente));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarCliente(@PathVariable Integer id) {
         clienteService.deletarCliente(id);
         return ResponseEntity.noContent().build();
     }

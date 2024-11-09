@@ -21,10 +21,12 @@ public class MovimentacaoService {
     @Autowired
     private ContaCreditoService contaCreditoService;
 
-    public Movimentacao registrarMovimentacao(Movimentacao movimentacao) {
+    public Movimentacao registrarMovimentacao(Movimentacao movimentacao, Integer idConta) {
         // Verificar se foi fornecido um ID de conta para movimentações de débito
-        if (movimentacao.getConta() != null && movimentacao.getTipo() == TipoMovimentacao.DEBITO) {
-            Conta conta = contaService.buscarContaPorId(movimentacao.getConta().getId());
+        Conta conta = contaService.buscarContaPorId(idConta);
+        movimentacao.setConta(conta);
+        movimentacao.setDataMovimentacao(LocalDate.now());
+        if (movimentacao.getTipo() == TipoMovimentacao.DEBITO) {
 
             // Verificar se a conta está ativa
             if (conta.getStatus() != StatusConta.ATIVA) {
@@ -41,10 +43,12 @@ public class MovimentacaoService {
 
             // Atualizar a conta
             contaService.atualizarConta(conta.getId(), conta);
+
+            movimentacao.setStatusPagamento(StatusPagamento.PAGO);
         }
         // Verificar se foi fornecido um ID de conta de crédito para movimentações de crédito
-        else if (movimentacao.getContaCredito() != null && movimentacao.getTipo() == TipoMovimentacao.CREDITO) {
-            ContaCredito contaCredito = contaCreditoService.buscarContaCreditoPorId(movimentacao.getContaCredito().getId());
+        else if (movimentacao.getTipo() == TipoMovimentacao.CREDITO) {
+            ContaCredito contaCredito = contaCreditoService.buscarContaCreditoPorConta(conta.getId());
 
             // Verificar se a conta de crédito está ativa
             if (contaCredito.getStatus() != StatusConta.ATIVA) {
@@ -69,15 +73,13 @@ public class MovimentacaoService {
 
             // Atualizar a conta de crédito
             contaCreditoService.atualizarContaCredito(contaCredito.getId(), contaCredito);
-        } else {
-            throw new RuntimeException("Nenhuma conta válida fornecida ou tipo de movimentação incorreto.");
         }
 
         // Salvar a movimentação e retornar
         return movimentacaoRepository.save(movimentacao);
     }
 
-    public List<Movimentacao> listarMovimentacoesPorFiltros(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento) {
+    public List<Movimentacao> listarMovimentacoesPorFiltros(Integer contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento) {
         // Verifica quais filtros foram fornecidos e faz a busca correspondente
         if (tipo != null && dataInicio != null && dataFim != null && statusPagamento != null) {
             return movimentacaoRepository.findByContaIdAndTipoAndDataMovimentacaoBetweenAndStatusPagamento(contaId, tipo, dataInicio, dataFim, statusPagamento);
@@ -99,7 +101,7 @@ public class MovimentacaoService {
         }
     }
 
-    public Movimentacao buscarMovimentacaoPorId(Long id) {
+    public Movimentacao buscarMovimentacaoPorId(Integer id) {
         Optional<Movimentacao> movimentacao = movimentacaoRepository.findById(id);
         return movimentacao.orElseThrow(() -> new RuntimeException("Movimentação não encontrada"));
     }

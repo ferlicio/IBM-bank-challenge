@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ContaRepository extends JpaRepository<Conta, Long> {
+public interface ContaRepository extends JpaRepository<Conta, Integer> {
 
     // Buscar uma conta pelo ID do cliente
-    Optional<Conta> findByClienteId(Long clienteId);
+    Optional<Conta> findByClienteId(Integer clienteId);
+
+    Optional<Conta> findByNumero(Integer numero);
 
     // Buscar todas as contas de um tipo específico
     List<Conta> findByTipoConta(String tipoConta);
@@ -22,5 +24,5 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
     List<Conta> findByStatus(String status);
 
     // Buscar uma conta pelo número da conta (se for um campo único)
-    Optional<Conta> findById(Long numeroConta);
+    Optional<Conta> findById(Integer numeroConta);
 }

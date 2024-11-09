@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     // Buscar cliente por ID
-    Optional<Cliente> findById(Long id);
+    Optional<Cliente> findById(Integer id);
 
     // Buscar cliente por CPF (ou outro campo único)
     // Optional<Cliente> findByCpf(String cpf);

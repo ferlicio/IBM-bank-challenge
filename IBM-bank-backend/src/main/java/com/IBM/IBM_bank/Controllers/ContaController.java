@@ -15,9 +15,10 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
-    @PostMapping
-    public ResponseEntity<Conta> criarConta(@RequestBody Conta conta) {
-        return ResponseEntity.ok(contaService.criarConta(conta));
+    @PostMapping("/nova/{idCliente}")
+    public ResponseEntity<Conta> criarConta(@PathVariable Integer idCliente,
+                                            @RequestBody Conta conta) {
+        return ResponseEntity.ok(contaService.criarConta(conta,idCliente));
     }
 
     @GetMapping
@@ -26,17 +27,17 @@ public class ContaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Conta> buscarConta(@PathVariable Long id) {
+    public ResponseEntity<Conta> buscarConta(@PathVariable Integer id) {
         return ResponseEntity.ok(contaService.buscarContaPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Conta> atualizarConta(@PathVariable Long id, @RequestBody Conta conta) {
+    public ResponseEntity<Conta> atualizarConta(@PathVariable Integer id, @RequestBody Conta conta) {
         return ResponseEntity.ok(contaService.atualizarConta(id, conta));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarConta(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarConta(@PathVariable Integer id) {
         contaService.deletarConta(id);
         return ResponseEntity.noContent().build();
     }

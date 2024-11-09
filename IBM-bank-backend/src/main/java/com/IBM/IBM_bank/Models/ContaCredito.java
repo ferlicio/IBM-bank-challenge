@@ -9,10 +9,10 @@ public class ContaCredito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "conta_id", referencedColumnName = "id")
+    @JoinColumn(name = "conta_id", referencedColumnName = "id", nullable = false, unique = true)
     private Conta conta;
 
     @Column(nullable = false, length = 10)
@@ -37,11 +37,11 @@ public class ContaCredito {
 
     // Getters e Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ContaCreditoRepository extends JpaRepository<ContaCredito, Long> {
+public interface ContaCreditoRepository extends JpaRepository<ContaCredito, Integer> {
 
     // Buscar uma conta de crédito por cliente
-    //Optional<ContaCredito> findByClienteId(Long clienteId);
+    //Optional<ContaCredito> findByClienteId(Integer clienteId);
+
+    Optional<ContaCredito> findByContaId(Integer contaId);
 
     // Buscar todas as contas de crédito com limite superior a um valor específico
     List<ContaCredito> findByLimiteCreditoGreaterThan(Double limiteCredito);
@@ -24,5 +26,5 @@ public interface ContaCreditoRepository extends JpaRepository<ContaCredito, Long
     //List<ContaCredito> findByStatusPagamento(StatusPagamento statusPagamento);
 
     // Buscar contas de crédito de um cliente e tipo de conta específico
-    //List<ContaCredito> findByClienteIdAndTipoConta(Long clienteId, String tipoConta);
+    //List<ContaCredito> findByClienteIdAndTipoConta(Integer clienteId, String tipoConta);
 }

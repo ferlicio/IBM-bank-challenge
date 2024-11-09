@@ -6,6 +6,7 @@ import com.IBM.IBM_bank.Models.StatusConta;
 import com.IBM.IBM_bank.Models.TipoConta;
 import com.IBM.IBM_bank.Repositories.ClienteRepository;
 import com.IBM.IBM_bank.Repositories.ContaRepository;
+import com.IBM.IBM_bank.Services.Exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +24,14 @@ public class ClienteService {
     private ContaRepository contaRepository;
 
     @Transactional
-    public Cliente criarClienteComConta(Cliente cliente) {
+    public Cliente criarClienteComConta(Cliente cliente, Integer numeroConta) {
         // Salvar o cliente no banco de dados
         Cliente clienteSalvo = clienteRepository.save(cliente);
 
         // Criar uma nova conta com saldo zero e associar ao cliente
         Conta novaConta = new Conta();
-        novaConta.setNumero(clienteSalvo.getConta().getNumero());
-        if (cliente.getConta().getTipoConta() != null) {
-            novaConta.setTipoConta(TipoConta.CORRENTE);
-        }
+        novaConta.setNumero(numeroConta);
+        novaConta.setTipoConta(TipoConta.CORRENTE);
         novaConta.setSaldo(0.0); // Saldo inicial zero
         novaConta.setStatus(StatusConta.ATIVA);
         novaConta.setCliente(clienteSalvo); // Associar a conta ao cliente salvo
@@ -48,12 +47,13 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Cliente buscarClientePorId(Long id) {
+    public Cliente buscarClientePorId(Integer id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        return cliente.orElseThrow(
+                () -> new EntityNotFoundException("Cliente não cadastrado: " + id));
     }
 
-    public Cliente atualizarCliente(Long id, Cliente clienteAtualizado) {
+    public Cliente atualizarCliente(Integer id, Cliente clienteAtualizado) {
         Cliente clienteExistente = buscarClientePorId(id);
         clienteExistente.setNome(clienteAtualizado.getNome());
         clienteExistente.setIdade(clienteAtualizado.getIdade());
@@ -62,7 +62,7 @@ public class ClienteService {
         return clienteRepository.save(clienteExistente);
     }
 
-    public void deletarCliente(Long id) {
+    public void deletarCliente(Integer id) {
         clienteRepository.deleteById(id);
     }
 
