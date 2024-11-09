@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableFormFields } from 'src/app/widget/ait-form/ait-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { movimentacaoApiService } from 'src/app/core/services/api/movimentacao/movimentacao.api.service';
+import { MovimentacaoApiService } from 'src/app/core/services/api/movimentacao/movimentacao.api.service';
 
 
 @Component({
@@ -75,13 +75,11 @@ export class FormMovimentacaoComponent implements OnInit {
   isEditing: boolean = false;
 
   constructor(private fb: FormBuilder, private router:Router, 
-    private _snackBar: MatSnackBar, private movimentacaoApiService:movimentacaoApiService, 
-    private route: ActivatedRoute, private ibgeService:ibgeService,
-    private changeDetector: ChangeDetectorRef, private validacoesService:ValidacoesService) { }
+    private _snackBar: MatSnackBar, private movimentacaoApiService: MovimentacaoApiService, 
+    private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.setValueChanges()
-    this.getEstados()
     this.route.url.subscribe(url => {
       if (url[0].path == 'editar') {
         this.formMovimentacao.disable()
@@ -96,74 +94,14 @@ export class FormMovimentacaoComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
-  getEstados() {
-    this.ibgeService.getEstados().subscribe((estados:estado[]) => {
-      estados.forEach((estado:estado) => {
-        if (this.fieldsmovimentacaoEndereco[1]?.[0]) {
-          if (!this.fieldsmovimentacaoEndereco[1][0].options) {
-            this.fieldsmovimentacaoEndereco[1][0].options = [];
-          }
-          this.fieldsmovimentacaoEndereco[1][0].options.push([estado.nome,estado.sigla])
-        }
-      })
-      })
-  }
 
-  setValueChanges() {
-    this.formMovimentacao.controls['cnpj'].valueChanges.subscribe((cnpj) => {
-      if(cnpj.length == 14 && this.validacoesService.validarCNPJ(cnpj)) {
-        this.movimentacaoApiService.getCNPJ(cnpj).subscribe((cnpjData) => {
-          this.formMovimentacao.patchValue({
-            razaoSocial: cnpjData['RAZAO SOCIAL'],
-            nomeFantasia: cnpjData['NOME FANTASIA'],
-            email: cnpjData['EMAIL'],
-            telefone1: cnpjData['TELEFONE'],
-          })
-          if (this.formMovimentacao.controls['cep'].value == '') {
-            this.formMovimentacao.patchValue({
-              cep: cnpjData['CEP'],
-              numero: cnpjData['NUMERO'],
-            })
-          }
-        })
-      }
-      if (!this.validacoesService.validarCNPJ(cnpj)) {
-        this.formMovimentacao.controls['cnpj'].setErrors({invalidCNPJ: true})
-      }
-    })
 
-    this.formMovimentacao.controls['cep'].valueChanges.subscribe((cep) => {
-      if(cep.length == 8) {
-        this.movimentacaoApiService.getAddressViaCep(cep).subscribe((address) => {
-          this.formMovimentacao.patchValue({
-            logradouro: address.logradouro,
-            bairro: address.bairro,
-            estado: address.uf,
-            cidade: address.localidade,
-          })
-        })
-      }
-    })
-
-    this.formMovimentacao.controls['estado'].valueChanges.subscribe((estado) => {
-      if (estado) this.ibgeService.getMunicipiosPorUF(estado).subscribe((cidades) => {
-        if (this.fieldsmovimentacaoEndereco[1]?.[1]){
-          let todasCidades:any[] = [];
-          cidades.forEach((cidade:any) => {
-            todasCidades.push([cidade.nome,cidade.nome])
-          })
-          this.fieldsmovimentacaoEndereco[1][1].options = todasCidades;
-        }
-      })
-    })
-  }
-
-  salvarmovimentacao() {
+  salvarMovimentacao() {
     console.log(this.formMovimentacao.value);
     this._snackBar.open("movimentacao "+ (this.isEditing?"editado":"salvo") +" com sucesso", "fechar", {duration: 5000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
     this.router.navigate(['/Movimentacoes']);
   }
-  editarmovimentacao() {
+  editarMovimentacao() {
     this.isEditing = true;
     this.formMovimentacao.enable();
     this.formMovimentacao.controls['cnpj'].disable();

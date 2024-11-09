@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListarMovimentacoesComponent } from './listar-Movimentacoes/listar-Movimentacoes.component';
+import { ListarMovimentacoesComponent } from './listar-movimentacoes/listar-movimentacoes.component';
 import { FormMovimentacaoComponent } from './form-movimentacao/form-movimentacao.component';
 
 const routes: Routes = [
@@ -16,7 +16,7 @@ const routes: Routes = [
         component: FormMovimentacaoComponent
       },
       {
-        path: 'editar',
+        path: 'ver',
         component: FormMovimentacaoComponent
       },
     ]

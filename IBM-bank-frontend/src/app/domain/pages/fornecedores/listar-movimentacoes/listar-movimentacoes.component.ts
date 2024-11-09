@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ElementActionDialogComponent } from 'src/app/widget/ait-table/element-action-dialog/element-action-dialog.component';
-import { movimentacao, eColunaXPropmovimentacao } from 'src/shared/models/movimentacao';
+import { Movimentacao, eColunaXPropMovimentacao } from 'src/shared/models/movimentacao';
 import { ScreenSizeService } from 'src/shared/services/screen-size.service';
 
 @Component({
@@ -14,20 +14,12 @@ import { ScreenSizeService } from 'src/shared/services/screen-size.service';
 export class ListarMovimentacoesComponent {
 
   screenSize!: string;
-  Movimentacoes: movimentacao[] = [
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Arriba', cnpj: '123.456.789-00', email: 'teste', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Toshiba', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Toboe', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Andale', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Xiaomi', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Lenovo', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Redragon', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Trident', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
-    {id:1, tipo:'agencia', razaoSocial:'', nomeFantasia: 'Ibis', cnpj: '123.456.789-00', email: '', website: '', telefone:'', idAreaAtuacao: 0},
+  Movimentacoes: Movimentacao[] = [
+
   ]
   colunasVisiveis: string[] = ['Nome', 'CNPJ', 'Email', 'Website', 'Telefone', 'Area de atuação'];
   todasColunas: string[] = [...this.colunasVisiveis, 'Tipo', 'Contato'];
-  colunaXPropriedade = eColunaXPropmovimentacao; 
+  colunaXPropriedade = eColunaXPropMovimentacao; 
 
   filtroEPesquisa: FormGroup = this.fb.group({
     filtro: [''],

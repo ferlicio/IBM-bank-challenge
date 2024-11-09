@@ -2,7 +2,7 @@
     <div class="titulo">
         <h3 class="titulo">Dados do movimentacao</h3>
         <div class="separador"></div>
-        <button mat-raised-button color="primary" (click)="editarmovimentacao()" *ngIf="queryParams?.id"
+        <button mat-raised-button color="primary" (click)="editarMovimentacao()" *ngIf="queryParams?.id"
             [disabled]="isEditing" class="edit">
             {{!isEditing ? 'editar' : ' editando... '}}
         </button>
@@ -30,7 +30,7 @@
         [formgroup]="formMovimentacao"
     ></ait-form>
     <button mat-raised-button [ngClass]="{'saveButton':formMovimentacao.valid}" 
-        (click)="salvarmovimentacao()" *ngIf="!formMovimentacao.disabled" style="display: block; margin-left: auto"
+        (click)="salvarMovimentacao()" *ngIf="!formMovimentacao.disabled" style="display: block; margin-left: auto"
         [disabled]="formMovimentacao.invalid||formMovimentacao.disabled">
         <mat-icon>save</mat-icon>
         Salvar
