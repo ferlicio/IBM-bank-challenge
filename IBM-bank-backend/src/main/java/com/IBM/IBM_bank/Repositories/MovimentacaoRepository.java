@@ -11,25 +11,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
+public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Integer> {
 
     // Buscar movimentações por conta (assumindo que a Conta tem um relacionamento @ManyToOne)
-    List<Movimentacao> findByContaId(Long contaId);
+    List<Movimentacao> findByContaId(Integer contaId);
 
-    List<Movimentacao> findByContaIdAndTipo(Long contaId, TipoMovimentacao tipo);
+    List<Movimentacao> findByContaIdAndTipo(Integer contaId, TipoMovimentacao tipo);
 
-    List<Movimentacao> findByContaIdAndDataMovimentacaoBetween(Long contaId, LocalDate dataInicio, LocalDate dataFim);
+    List<Movimentacao> findByContaIdAndDataMovimentacaoBetween(Integer contaId, LocalDate dataInicio, LocalDate dataFim);
 
-    List<Movimentacao> findByContaIdAndStatusPagamento(Long contaId, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndStatusPagamento(Integer contaId, StatusPagamento statusPagamento);
 
-    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetween(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim);
+    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetween(Integer contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim);
 
-    List<Movimentacao> findByContaIdAndDataMovimentacaoBetweenAndStatusPagamento(Long contaId, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndDataMovimentacaoBetweenAndStatusPagamento(Integer contaId, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
 
-    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetweenAndStatusPagamento(Long contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndTipoAndDataMovimentacaoBetweenAndStatusPagamento(Integer contaId, TipoMovimentacao tipo, LocalDate dataInicio, LocalDate dataFim, StatusPagamento statusPagamento);
 
-    List<Movimentacao> findByContaIdAndTipoAndStatusPagamento(Long contaId, TipoMovimentacao tipo, StatusPagamento statusPagamento);
+    List<Movimentacao> findByContaIdAndTipoAndStatusPagamento(Integer contaId, TipoMovimentacao tipo, StatusPagamento statusPagamento);
 
     // Buscar uma movimentação por ID (exemplo básico)
-    Optional<Movimentacao> findById(Long id);
+    Optional<Movimentacao> findById(Integer id);
 }

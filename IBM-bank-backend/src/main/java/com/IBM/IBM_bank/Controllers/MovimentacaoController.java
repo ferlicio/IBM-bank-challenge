@@ -20,9 +20,10 @@ public class MovimentacaoController {
     @Autowired
     private MovimentacaoService movimentacaoService;
 
-    @PostMapping
-    public ResponseEntity<Movimentacao> registrarMovimentacao(@RequestBody Movimentacao movimentacao) {
-        return ResponseEntity.ok(movimentacaoService.registrarMovimentacao(movimentacao));
+    @PostMapping("/{idConta}/nova")
+    public ResponseEntity<Movimentacao> registrarMovimentacao(@PathVariable Integer idConta,
+                                                              @RequestBody Movimentacao movimentacao) {
+        return ResponseEntity.ok(movimentacaoService.registrarMovimentacao(movimentacao, idConta));
     }
 
     @GetMapping
@@ -33,7 +34,7 @@ public class MovimentacaoController {
     // Lista movimentações por conta_id e, opcionalmente, por tipo de movimentação, intervalo de datas e status de pagamento
     @GetMapping("/conta/{contaId}")
     public ResponseEntity<List<Movimentacao>> listarMovimentacoesPorConta(
-            @PathVariable Long contaId,
+            @PathVariable Integer contaId,
             @RequestParam(required = false) TipoMovimentacao tipo,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
@@ -45,7 +46,7 @@ public class MovimentacaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movimentacao> buscarMovimentacao(@PathVariable Long id) {
+    public ResponseEntity<Movimentacao> buscarMovimentacao(@PathVariable Integer id) {
         return ResponseEntity.ok(movimentacaoService.buscarMovimentacaoPorId(id));
     }
 

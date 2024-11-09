@@ -15,9 +15,10 @@ public class ContaCreditoController {
     @Autowired
     private ContaCreditoService contaCreditoService;
 
-    @PostMapping
-    public ResponseEntity<ContaCredito> criarContaCredito(@RequestBody ContaCredito contaCredito) {
-        return ResponseEntity.ok(contaCreditoService.criarContaCredito(contaCredito));
+    @PostMapping("/nova/{idConta}")
+    public ResponseEntity<ContaCredito> criarContaCredito(@PathVariable Integer idConta,
+                                                          @RequestBody ContaCredito contaCredito) {
+        return ResponseEntity.ok(contaCreditoService.criarContaCredito(contaCredito,idConta));
     }
 
     @GetMapping
@@ -26,17 +27,17 @@ public class ContaCreditoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContaCredito> buscarContaCredito(@PathVariable Long id) {
+    public ResponseEntity<ContaCredito> buscarContaCredito(@PathVariable Integer id) {
         return ResponseEntity.ok(contaCreditoService.buscarContaCreditoPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContaCredito> atualizarContaCredito(@PathVariable Long id, @RequestBody ContaCredito contaCredito) {
+    public ResponseEntity<ContaCredito> atualizarContaCredito(@PathVariable Integer id, @RequestBody ContaCredito contaCredito) {
         return ResponseEntity.ok(contaCreditoService.atualizarContaCredito(id, contaCredito));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarContaCredito(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarContaCredito(@PathVariable Integer id) {
         contaCreditoService.deletarContaCredito(id);
         return ResponseEntity.noContent().build();
     }

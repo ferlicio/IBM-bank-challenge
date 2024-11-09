@@ -9,10 +9,10 @@ public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false)
-    private Long numero;
+    @Column(nullable = false, unique = true)
+    private Integer numero;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -40,19 +40,19 @@ public class Conta {
 
     // Getters e Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
