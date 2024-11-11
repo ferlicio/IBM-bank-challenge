@@ -39,8 +39,8 @@ public class Conta {
     @OneToOne(mappedBy = "conta", cascade = CascadeType.ALL)
     private ContaCredito contaCredito;
 
-    @JsonProperty
-    public Integer getNumeroContaCredito() {
+    @JsonProperty("contaCreditoId")
+    public Integer getContaCreditoId() {
         return contaCredito != null ? contaCredito.getId() : null;
     }
 

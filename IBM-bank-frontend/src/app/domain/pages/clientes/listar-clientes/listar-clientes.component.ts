@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Cliente, eColunaXPropCliente } from 'src/shared/models/cliente';
+import { Cliente} from 'src/shared/models/cliente';
 import { ScreenSizeService } from 'src/shared/services/screen-size.service';
 import { ClienteApiService } from 'src/app/core/services/api/cliente/cliente.api.service';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ export class ListarClientesComponent implements OnInit {
   clientes$: Observable<Cliente[]> = this.clienteService.getAllClientes();
   todasColunas: string[] = ['Nome', 'Idade', 'Email', 'Acoes'];
   
-  constructor(private screenSizeService: ScreenSizeService, private fb: FormBuilder, 
+  constructor(private screenSizeService: ScreenSizeService, 
               private router: Router, private clienteService: ClienteApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {   
@@ -34,6 +34,6 @@ export class ListarClientesComponent implements OnInit {
 
   verMovimentacoes(id: number) {
     this.router.navigate(['/movimentacoes'],
-    {queryParams: {numConta: id}})
+    {queryParams: {contaId: id}})
   }
 }

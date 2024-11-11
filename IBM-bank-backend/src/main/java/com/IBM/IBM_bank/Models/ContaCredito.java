@@ -11,6 +11,7 @@ public class ContaCredito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "conta_id", referencedColumnName = "id", nullable = false, unique = true)
     private Conta conta;

@@ -40,7 +40,7 @@ export class ListarMovimentacoesComponent implements OnInit {
   
   constructor(private screenSizeService: ScreenSizeService, private router: Router,
     private route: ActivatedRoute, private movimentacoesApiService: MovimentacaoApiService,
-    private contaApiService: ContaApiService, private contaCreditoApiService: ContaCreditoApiService,
+    private contaApiService: ContaApiService, public contaCreditoApiService: ContaCreditoApiService,
     private _snackBar: MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {   
@@ -50,10 +50,14 @@ export class ListarMovimentacoesComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.queryParams = params;
-        if (params['numConta']) {
-          this.conta$ = this.contaApiService.getContaById(params['numConta'])
-          this.contaCredito$ = this.contaCreditoApiService.getContaCreditoById(params['numConta'])
-          this.movimentacoes$ = this.movimentacoesApiService.listarMovimentacoesPorConta(params['numConta'])
+        if (params['contaId']) {
+          this.conta$ = this.contaApiService.getContaById(params['contaId'])
+          this.contaCredito$ = this.contaApiService.getContaById(params['contaId']).pipe(
+            switchMap(conta => {
+              return this.contaCreditoApiService.getContaCreditoById(conta.contaCreditoId?? 0)
+            })
+          )
+          this.movimentacoes$ = this.movimentacoesApiService.listarMovimentacoesPorConta(params['contaId'])
         } else {
           this._snackBar.open("Nenhum cliente selecionado. Retornando à listagem de clientes", "fechar", {duration: 5000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
           //this.router.navigate(['/clientes'])

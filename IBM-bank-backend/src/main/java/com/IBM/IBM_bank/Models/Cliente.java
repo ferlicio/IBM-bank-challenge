@@ -24,9 +24,9 @@ public class Cliente {
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Conta conta;
 
-    @JsonProperty("numeroConta")
-    public Integer getNumeroConta() {
-        return conta != null ? conta.getNumero() : null;
+    @JsonProperty("contaId")
+    public Integer getContaId() {
+        return conta != null ? conta.getId() : null;
     }
 
     // Getters e Setters

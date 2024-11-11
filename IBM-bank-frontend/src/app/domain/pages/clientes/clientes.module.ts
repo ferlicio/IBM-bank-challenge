@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormClienteComponent } from './form-cliente/form-cliente.component';
 import { MatSortModule } from '@angular/material/sort';
 import { AitFormModule } from 'src/app/widget/ait-form/ait-form.module';
+import { FormDialogComponent } from './components/form-dialog/form-dialog.component';
 
 
 @NgModule({
   declarations: [
     ListarClientesComponent,
     FormClienteComponent,
+    FormDialogComponent
   ],
   imports: [
     CommonModule,

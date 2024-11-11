@@ -16,4 +16,5 @@ export interface Conta {
     status: StatusConta;
     clienteId?: number;
     nomeCliente?: string;
+    contaCreditoId?: number;
 }
