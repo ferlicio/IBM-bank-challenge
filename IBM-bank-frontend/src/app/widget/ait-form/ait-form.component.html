@@ -27,6 +27,7 @@
                         <mat-label>{{field.name!='' ?field.name :'Field with no name'}}</mat-label>
                         <input matInput type="number" formControlName="{{field.formControlName}}" class="number" 
                             [ngClass]="{'price':field.formControlName.toLowerCase().includes('price')}"
+                            maxlength="{{field.validators?.maxLength!=undefined ?field.validators?.maxLength :null}}"
                             required="{{hasRequiredValidator(field.formControlName)}}" placeholder="{{field.fieldPlaceholder}}">
                                 <span matTextPrefix *ngIf="field.formControlName.toLowerCase().includes('price')">$&nbsp;</span>
                                 <span matTextSuffix *ngIf="field.formControlName.toLowerCase().includes('price')">.00</span>
@@ -39,6 +40,13 @@
                             <mat-option value="{{item[1]}}" *ngFor="let item of field.options">{{item[0]}}</mat-option>
                         </mat-select>
                     </mat-form-field>
+                </span>
+                <span *ngIf="field.type=='buttonToggle'">
+                    <mat-button-toggle-group formControlName="{{field.formControlName}}" aria-label="Font Style"
+                        required="{{hasRequiredValidator(field.formControlName)}}"
+                        >
+                        <mat-button-toggle *ngFor="let item of field.options" value="{{item[1]}}">{{item[0]}}</mat-button-toggle>
+                    </mat-button-toggle-group>
                 </span>
                 <span *ngIf="field.type=='date'">
                     <mat-form-field style="width: 100%;">

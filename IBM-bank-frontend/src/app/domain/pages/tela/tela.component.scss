@@ -1,3 +1,5 @@
+$baseColor: rgb(27, 115, 229);
+
 .container {
 	height: calc(100%);
 	background-color: rgb(236, 241, 255);
@@ -6,7 +8,7 @@
   
   .sidenav {
 	transition: 0.5s;
-	background-color: rgb(229, 81, 27);
+	background-color: $baseColor;
 	width: 230px;
 	border: none;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
@@ -35,6 +37,7 @@
   .logo {
 	background-color: white;
 	height: 9.3em;
+	display: flex;
   }
   
   p {
@@ -58,7 +61,7 @@
   
   ::ng-deep {
 	.menu {
-		background-color: rgb(229, 81, 27);
+		background-color: $baseColor;
 		position: absolute;
 		left: 9em;
 		top: -3em;
@@ -106,7 +109,7 @@
 	align-items: center;
 	padding: 0 10px;
 	height: 50px;
-	background-color: rgb(229, 81, 27);
+	background-color: $baseColor;
 	border-radius: 0px 0px 20px 30px;
 	color: white;
 	font-size: 20px;

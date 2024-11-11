@@ -1,6 +1,7 @@
 package com.IBM.IBM_bank.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -37,6 +38,16 @@ public class Conta {
     @JsonIgnore
     @OneToOne(mappedBy = "conta", cascade = CascadeType.ALL)
     private ContaCredito contaCredito;
+
+    @JsonProperty
+    public Integer getNumeroContaCredito() {
+        return contaCredito != null ? contaCredito.getId() : null;
+    }
+
+    @JsonProperty
+    public String getNomeCliente() {
+        return cliente != null ? cliente.getNome() : null;
+    }
 
     // Getters e Setters
 

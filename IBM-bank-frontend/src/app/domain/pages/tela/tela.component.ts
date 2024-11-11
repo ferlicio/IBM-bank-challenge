@@ -5,8 +5,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { ScreenSizeService } from 'src/shared/services/screen-size.service';
+import { startWith } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-tela',
   templateUrl: './tela.component.html',
   styleUrls: ['./tela.component.scss']
@@ -41,13 +43,13 @@ export class TelaComponent  implements OnInit {
   private setPageTitle(): void {
     const pageTitle = this.getPageTitle(this.router.url);
     this.titleService.setTitle(pageTitle);
-    this.pageTitle = pageTitle.slice(12);
+    this.pageTitle = pageTitle.replace(environment.appName+' | ','');
     
-    this.router.events.subscribe(event => {
+    this.router.events.pipe().subscribe(event => {
       if (event instanceof NavigationEnd) {
         const pageTitle = this.getPageTitle(event.urlAfterRedirects);
         this.titleService.setTitle(pageTitle);
-        this.pageTitle = pageTitle.slice(12);
+        this.pageTitle = pageTitle.replace(environment.appName+' | ','');
         if (this.screenSize !=='desktop') {
           this.opened = false
         }

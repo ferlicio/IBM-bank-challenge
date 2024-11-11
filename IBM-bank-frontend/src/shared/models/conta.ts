@@ -14,15 +14,6 @@ export interface Conta {
     tipoConta: TipoConta;
     saldo: number;
     status: StatusConta;
-    clienteId: number;
-}
-
-export enum eColunaXPropConta {
-    // 'Nome da coluna' = 'nome da propriedade'
-    'ID' = 'id',
-    'Número' = 'numero',
-    'Tipo da Conta' = 'tipoConta',
-    'Saldo' = 'saldo',
-    'Status' = 'status',
-    'ID do Cliente' = 'clienteId',
+    clienteId?: number;
+    nomeCliente?: string;
 }

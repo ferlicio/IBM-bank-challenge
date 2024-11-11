@@ -6,7 +6,6 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormClienteComponent } from './form-cliente/form-cliente.component';
 import { MatSortModule } from '@angular/material/sort';
-import { AitTableModule } from 'src/app/widget/ait-table/ait-table.module';
 import { AitFormModule } from 'src/app/widget/ait-form/ait-form.module';
 
 
@@ -21,7 +20,6 @@ import { AitFormModule } from 'src/app/widget/ait-form/ait-form.module';
     ClientesRoutingModule,
     ReactiveFormsModule,
     MatSortModule,
-    AitTableModule,
     AitFormModule
   ]
 })

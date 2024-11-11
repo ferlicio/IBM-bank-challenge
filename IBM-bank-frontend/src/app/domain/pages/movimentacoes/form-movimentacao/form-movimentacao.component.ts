@@ -7,6 +7,7 @@ import { MovimentacaoApiService } from 'src/app/core/services/api/movimentacao/m
 
 
 @Component({
+  standalone: false,
   selector: 'app-form-movimentacao',
   templateUrl: './form-movimentacao.component.html',
   styleUrls: ['./form-movimentacao.component.scss']
