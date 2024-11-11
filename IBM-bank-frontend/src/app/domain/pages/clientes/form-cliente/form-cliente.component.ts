@@ -6,8 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { ClienteApiService } from 'src/app/core/services/api/cliente/cliente.api.service';
 import { FormField, TableFormFields } from 'src/app/widget/ait-form/ait-form.component';
-import { FormDialogComponent } from 'src/app/widget/form-dialog/form-dialog.component';
+import { FormDialogComponent } from 'src/app/domain/pages/clientes/components/form-dialog/form-dialog.component';
 import { Cliente } from 'src/shared/models/cliente';
+import { ContaCreditoApiService } from 'src/app/core/services/api/contaCredito/contaCredito.api.service';
 
 @Component({
   standalone: false,
@@ -20,7 +21,7 @@ export class FormClienteComponent implements OnInit{
   constructor(
     private fb: FormBuilder, private router:Router, 
     private _snackBar: MatSnackBar, private clienteApiService: ClienteApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private contaCreditoApiService: ContaCreditoApiService
   ) { }
 
   readonly dialog = inject(MatDialog)
@@ -102,9 +103,10 @@ export class FormClienteComponent implements OnInit{
   cadastrarCredito() {
     this.dialog.open(FormDialogComponent).afterClosed().subscribe(result => {
       if (result) {
-        /* this.clienteApiService.createContaCredito(result).subscribe(() => {
+        console.log(result)
+        this.contaCreditoApiService.createContaCredito(result, this.queryParams['id']).subscribe(() => {
           this._snackBar.open("Conta de crédito cadastrada com sucesso", "fechar", {duration: 5000, panelClass: ['snackbar-success'], horizontalPosition: 'end'});
-        }) */
+        })
       }
     })
   }

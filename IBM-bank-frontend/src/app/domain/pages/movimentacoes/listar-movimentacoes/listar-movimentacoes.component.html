@@ -18,7 +18,7 @@
                 <div><span><strong>Saldo: </strong>{{conta.saldo}}</span></div>
             </ng-container>
             <ng-container *ngIf="formConta.tipoConta == 'credito'">
-                <div *ngIf="contaCredito$ | async as conta; else NaoPossuiCredito"><span><strong>Limite Disponivel: </strong>{{conta.limiteCredito - conta.saldoUtilizado}}</span></div>
+                <div *ngIf="contaCredito$ | async as contaCred; else NaoPossuiCredito"><span><strong>Limite Disponivel: </strong>{{contaCred.limiteCredito - contaCred.saldoUtilizado}}</span></div>
                 <ng-template #NaoPossuiCredito><span><strong>Crédito não cadastrado</strong></span></ng-template>
             </ng-container>
             
