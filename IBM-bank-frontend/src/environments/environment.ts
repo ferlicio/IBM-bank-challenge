@@ -5,7 +5,7 @@ export const environment = {
     production: false,
     appName: appName,
     pagesTitle: {
-        '/': appName +' | Página Inicial',
+        '/clientes': appName +' | Página Inicial',
 
         '/clientes/novo': appName +' | Novo cliente',
         '/clientes/editar': appName +' | Editar cliente',
@@ -15,12 +15,12 @@ export const environment = {
 
     } as {[key: string]: string},
     IBMBankApi: {
-        baseUrl: 'http://localhost:3000',
+        baseUrl: 'http://localhost:8080',
         endpoints: {
-            clientes: '/clientes',
-            movimentacoes: '/movimentacoes',
-            contas: '/contas',
-            contasCredito: '/contasCredito',
+            clientes: 'clientes',
+            movimentacoes: 'movimentacoes',
+            contas: 'contas',
+            contasCredito: 'contasCredito',
         }
     },
 

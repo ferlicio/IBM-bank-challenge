@@ -21,11 +21,12 @@ export interface FormField {
 type availableValidators = {
   maxLength?: number; maskPattern?: string;
 }
-type FieldType = "text" | "longText" | "number" | "select" | "date" | "radio" | "checkbox";
+type FieldType = "text" | "longText" | "number" | "select" | "buttonToggle" | "date" | "radio" | "checkbox";
 export type TableFormFields = (FormField|undefined)[][];
 
 
 @Component({
+  standalone: false,
   selector: 'ait-form',
   templateUrl: './ait-form.component.html',
   styleUrls: ['./ait-form.component.scss'],
@@ -99,6 +100,7 @@ export class AitFormComponent implements OnInit {
   ) { }
 
   hasRequiredValidator(formControlName: string): boolean {
+    if (!this.formgroup.controls[formControlName]) return false
     return this.formgroup.controls[formControlName].hasValidator(Validators.required);
   }
 

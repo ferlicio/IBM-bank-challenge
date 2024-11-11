@@ -57,7 +57,6 @@ public class ClienteService {
         Cliente clienteExistente = buscarClientePorId(id);
         clienteExistente.setNome(clienteAtualizado.getNome());
         clienteExistente.setIdade(clienteAtualizado.getIdade());
-        clienteExistente.setEndereco(clienteAtualizado.getEndereco());
         clienteExistente.setEmail(clienteAtualizado.getEmail());
         return clienteRepository.save(clienteExistente);
     }

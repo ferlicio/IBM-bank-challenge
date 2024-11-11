@@ -1,6 +1,7 @@
 package com.IBM.IBM_bank.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,15 +17,17 @@ public class Cliente {
     @Column(nullable = false, length = 3)
     private Integer idade;
 
-    @Column(nullable = false, length = 100)
-    private String endereco;
-
     @Column(nullable = false, length = 50, unique = true)
     private String email;
 
     @JsonIgnore
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Conta conta;
+
+    @JsonProperty("numeroConta")
+    public Integer getNumeroConta() {
+        return conta != null ? conta.getNumero() : null;
+    }
 
     // Getters e Setters
 
@@ -50,14 +53,6 @@ public class Cliente {
 
     public void setIdade(Integer idade) {
         this.idade = idade;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getEmail() {

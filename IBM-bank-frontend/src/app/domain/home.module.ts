@@ -7,7 +7,7 @@ import { TelaComponent } from './pages/tela/tela.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSortModule } from '@angular/material/sort';
-import { AitTableModule } from '../widget/ait-table/ait-table.module';
+
 
 
 @NgModule({
@@ -21,7 +21,6 @@ import { AitTableModule } from '../widget/ait-table/ait-table.module';
     MaterialModule,
     ReactiveFormsModule,
     MatSortModule,
-    AitTableModule,
   ],
 })
 export class HomeModule { }

@@ -1,7 +1,3 @@
-*{
-    font-size: 14px;
-}
-
 section.geral {
     padding: 20px;
 }
@@ -17,27 +13,10 @@ mat-divider {
     border-width: 1px;
 }
 
-form.tableSearch {
-    display: flex;
-    justify-content: space-between;
-    div.filterForTable {
-        display: flex;
-        button {
-            border-radius: 0px 21px 21px 0px;
-            padding: 0px;
-            scale: 0.8;
-            margin-left: -5px;
-            margin-top: -2px;
-        }
-    }
-    button.buttonFilter {
-        display: none;
-        mat-icon {
-            font-size: 25px;
-        }
-    }
+.mat-column-Acoes {
+    width: 130px;
+    text-align: center;
 }
-
 
 button.add.mobile {
     display: none;

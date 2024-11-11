@@ -4,7 +4,17 @@
 
 section.geral {
     padding: 20px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        span,strong {
+            font-size: 25px;
+        }
+    }
 }
+
 
 section.pageContent {
     margin-top: 15px;
@@ -17,27 +27,6 @@ mat-divider {
     border-width: 1px;
 }
 
-form.tableSearch {
-    display: flex;
-    justify-content: space-between;
-    div.filterForTable {
-        display: flex;
-        button {
-            border-radius: 0px 21px 21px 0px;
-            padding: 0px;
-            scale: 0.8;
-            margin-left: -5px;
-            margin-top: -2px;
-        }
-    }
-    button.buttonFilter {
-        display: none;
-        mat-icon {
-            font-size: 25px;
-        }
-    }
-}
-
 
 button.add.mobile {
     display: none;
@@ -47,12 +36,8 @@ button.add.mobile mat-icon {
     font-size: 30px;
 }
 
+
 ::ng-deep {
-    div.filterForTable {
-        button.mdc-button  {
-            min-width: 44px;
-        }
-    }
     button.mat-mdc-menu-item {
         span.mdc-list-item__primary-text{
             span {
@@ -63,14 +48,7 @@ button.add.mobile mat-icon {
             }
         }
     }
-    button.limparFiltros {
-        background: rgba(0,0,0,0.05) !important;
-        span{
-            font-weight: 500 !important;
-        }
-    }
 }
-
 
 ::ng-deep {
     button.add{

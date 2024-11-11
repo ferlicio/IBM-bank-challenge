@@ -5,60 +5,40 @@
     <button mat-fab color="primary" class="add mobile" routerLink="/clientes/novo">
         <mat-icon>add</mat-icon>
     </button>
-    <section class="pageContent">
-            <form action="" [formGroup]="filtroEPesquisa" class="tableSearch">
-                <div class="filterForTable">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Filtrar por</mat-label>
-                        <mat-select formControlName="filtro">
-                            <div *ngFor="let atributo of colunasVisiveis">
-                                <mat-option *ngIf="atributo!='Ações'" [value]="atributo">
-                                {{atributo}}
-                            </mat-option>
-                            </div>
-                        </mat-select>
-                    </mat-form-field>
-                    <button mat-flat-button color="warn" class="clearFilter"
-                    *ngIf="filtroEPesquisa.controls['filtro'].value!=''"
-                    (click)="filtroEPesquisa.controls['filtro'].setValue('')">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </div>
-                <button mat-fab [color]="filtroEPesquisa.controls['filtro'].value=='' ?'primary' :'warn'" 
-                [matMenuTriggerFor]="filter" class="buttonFilter">
-                    <mat-icon>filter_alt</mat-icon>
+    <section class="pageContent" *ngIf="clientes$ | async as clientes">
+        <table mat-table [dataSource]="clientes" class="mat-elevation-z8">
+          
+            <ng-container matColumnDef="Nome">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Idade">
+              <th mat-header-cell *matHeaderCellDef> Idade </th>
+              <td mat-cell *matCellDef="let element"> {{element.idade}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="Email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Acoes">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="editEl(element.id)"
+                matTooltip="Editar cliente">
+                  <mat-icon>edit</mat-icon>
                 </button>
-                <mat-menu #filter="matMenu">
-                    <button mat-menu-item (click)="filtroEPesquisa.controls['filtro'].setValue('')" class="limparFiltros">Limpar filtro</button>
-                    <div *ngFor="let atributo of colunasVisiveis">
-                        <button mat-menu-item *ngIf="atributo!='Ações'"
-                        (click)="filtroEPesquisa.controls['filtro'].setValue(atributo)">
-                            <span><mat-icon *ngIf="filtroEPesquisa.controls['filtro'].value==atributo" class="filterSelectedItem">arrow_forward_ios</mat-icon>
-                                {{atributo}}
-                            </span>
-                        </button>
-                    </div>
-                </mat-menu>
-                <div>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Pesquisar</mat-label>
-                        <input matInput type="text" formControlName="pesquisa">
-                        <mat-icon matSuffix>search</mat-icon>
-                    </mat-form-field>
-                </div>
-            </form>
-            <ait-table
-                [tableSource]="clientes"
-                [tableColumns]="todasColunas"
-                [tableVisibleColumns]="colunasVisiveis"
-                [ColumnXPropertyEnum]="colunaXPropriedade"
-                [filterAndSearch]="filtroEPesquisa.valueChanges"
-                elementName="cliente"
-                [paginatorInterval]="7"
-                [hasEdit]="true"
-                [hasDelete]="true"
-                (editFunction)="editEl($event)"
-                (deleteFunction)="deleteEl($event)"
-            ></ait-table>
+                <button mat-icon-button color="primary" (click)="verMovimentacoes(element.id)"
+                matTooltip="Ver movimentações da conta">
+                  <mat-icon>toc</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="todasColunas"></tr>
+            <tr mat-row *matRowDef="let row; columns: todasColunas;"></tr>
+          </table>
     </section>
 </section>

@@ -3,7 +3,6 @@ section.geral {
     div.titulo {
         display: flex;
         h3.titulo {
-            min-width: fit-content; 
             padding: 20px; 
             padding-top: 10px;
             padding-left: 10px;
@@ -16,10 +15,18 @@ section.geral {
             align-self: center; 
             margin-right: 20px;
         }
-        button.edit {
-            margin-left: auto; 
-            min-width: -moz-fit-content; 
+
+        div {
+            display: flex;
+            gap: 10px;
+            button.edit {
+                margin-left: auto; 
+            }
+        }
+
+        &, *:not(.separador) {
             min-width: fit-content;
+            min-width: -moz-fit-content; 
         }
     }
 }

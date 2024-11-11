@@ -1,8 +1,8 @@
 -- Inserindo dados de exemplo para a tabela de clientes
-INSERT INTO cliente (id, nome, idade, endereco, email) VALUES
-(1, 'João Silva', 30, 'Rua das Palmeiras, 123', 'joao.silva@example.com'),
-(2, 'Maria Oliveira', 25, 'Avenida Brasil, 456', 'maria.oliveira@example.com'),
-(3, 'Carlos Pereira', 40, 'Rua do Sol, 789', 'carlos.pereira@example.com');
+INSERT INTO cliente (id, nome, idade, email) VALUES
+(1, 'João Silva', 30,  'joao.silva@example.com'),
+(2, 'Maria Oliveira', 25, 'maria.oliveira@example.com'),
+(3, 'Carlos Pereira', 40, 'carlos.pereira@example.com');
 
 -- Inserindo dados de exemplo para a tabela de contas (relacionada a clientes)
 INSERT INTO conta (id, numero, saldo, cliente_id, tipo_conta, status) VALUES

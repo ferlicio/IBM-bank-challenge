@@ -25,8 +25,8 @@ export class ClienteApiService {
   }
 
   // Método para criar um novo cliente
-  createCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>(this.FULL_URL, cliente);
+  createCliente(cliente: Cliente, conta: number|undefined): Observable<Cliente> {
+    return this.http.post<Cliente>(`${this.FULL_URL}/novo/${conta}`, cliente);
   }
 
   // Método para atualizar um cliente existente

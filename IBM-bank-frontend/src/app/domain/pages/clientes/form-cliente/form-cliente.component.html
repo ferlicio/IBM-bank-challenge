@@ -2,10 +2,16 @@
   <div class="titulo">
       <h3 class="titulo">Dados do Cliente</h3>
       <div class="separador"></div>
-      <button mat-raised-button color="primary" (click)="editarCliente()" *ngIf="queryParams?.id"
-          [disabled]="isEditing" class="edit">
-          {{!isEditing ? 'editar' : ' editando... '}}
-      </button>
+      <div style="gap: 10px;">
+          <button mat-raised-button color="primary" (click)="editarCliente()" *ngIf="queryParams?.id && !isEditing"
+              [disabled]="isEditing" class="edit">
+              Cadastrar Crédito
+          </button>
+          <button mat-raised-button color="primary" (click)="editarCliente()" *ngIf="queryParams?.id"
+              [disabled]="isEditing" class="edit">
+              {{!isEditing ? 'editar' : ' editando... '}}
+          </button>
+      </div>
   </div>
   <ait-form
       [TableFormFields]="fieldsClientePrincipal"
@@ -13,20 +19,11 @@
   ></ait-form>
 
   <div class="titulo">
-      <h3 class="titulo">Endereço</h3>
+      <h3 class="titulo">Conta</h3>
       <div class="separador"></div>
   </div>
   <ait-form
-      [TableFormFields]="fieldsClienteEndereco"
-      [formgroup]="formCliente"
-  ></ait-form>
-
-  <div class="titulo">
-      <h3 class="titulo">Contato</h3>
-      <div class="separador"></div>
-  </div>
-  <ait-form
-      [TableFormFields]="fieldsClienteContato"
+      [TableFormFields]="fieldsClienteConta"
       [formgroup]="formCliente"
   ></ait-form>
   <button mat-raised-button [ngClass]="{'saveButton':formCliente.valid}" 
